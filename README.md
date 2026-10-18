@@ -2,7 +2,7 @@
 
 Term deposit subscription classifier built on the UCI Bank Marketing dataset.
 
-Status: work in progress. Setup and usage instructions will follow.
+Status: work in progress. Setup instruction will follow.
 
 ## License
 
