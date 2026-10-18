@@ -1,0 +1,4 @@
+# Optional: JupyterLab for notebooks/ (not needed for CI or Docker).
+-r requirements.txt
+ipykernel==7.4.0
+jupyterlab==4.6.4

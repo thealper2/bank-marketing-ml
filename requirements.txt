@@ -1,0 +1,10 @@
+# Exact runtime pins: used by Docker, CI and reproducible training runs.
+# Version *ranges* for the package itself live in pyproject.toml.
+# Update deliberately (one PR), then re-run: make check && make train
+joblib==1.6.0
+matplotlib==3.11.2
+numpy==2.5.4
+pandas==3.0.6
+pyyaml==6.0.3
+scikit-learn==1.9.1
+scipy==1.18.1

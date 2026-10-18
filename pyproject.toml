@@ -1,0 +1,80 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bank-marketing-ml"
+version = "0.1.0"
+description = "Term deposit subscription classifier for the UCI Bank Marketing dataset"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Alper KARACA", email = "thisiseternity12@gmail.com" }]
+classifiers = [
+     "Programming Language :: Python :: 3",
+     "Programming Language :: Python :: 3.12",
+     "Programming Language :: Python :: 3.13",
+     "Operating System :: OS Independent",   
+]
+# Abstract (range) dependencies. Exact pins live in requirements.txt.
+dependencies = [
+    "joblib>=1.4",
+    "matplotlib>=3.9",
+    "numpy>=2.0",
+    "pandas>=2.2",
+    "pyyaml>=6.0",
+    "scikit-learn>=1.6",
+    "scipy>=1.13",   
+]
+
+[project.scripts]
+bank-ml = "bank_marketing.cli:main"
+
+[project.urls]
+Repository = "https://github.com/thealper2/bank-marketing-ml"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = "-ra --strict-markers --strict-config"
+markers = [
+    "integration: end-to-end tests that train small models on synthetic data",
+]
+filterwarnings = ["error::FutureWarning"]
+
+[tool.coverage.run]
+source = ["bank_marketing"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+src = ["src", "tests"]
+extend-exclude = ["notebooks"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP", "SIM", "PTH", "NPY", "PD"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["PD"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src"]
+strict_optional = true
+warn_unused_ignores = true
+warn_redundant_ignores = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+
+[[tool.mypy.overrides]]
+module = ["sklearn.*", "joblib.*", "matplotlib.*", "scipy.*"]
+ignore_missing_imports = true
