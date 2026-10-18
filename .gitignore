@@ -1,0 +1,25 @@
+# ---- Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# ---- Virtual environments
+.venv/
+venv/
+
+# ---- Data and models never go into Git
+/data/
+/models/
+
+# ---- Secrets and machine-local settings
+.env
+.env.*
+!.env.example
+
+# ---- Editors and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,10 @@
+# Store text files with LF in the repository and check them out with LF,
+# so Makefile, YAML and shell snippets behave the same on Windows and Linux.
+* text=auto eol=lf
+
+# Binary files: never touch line endings, never diff as text.
+*.png binary
+*.jpg binary
+*.pdf binary
+*.zip binary
+*.joblib binary
