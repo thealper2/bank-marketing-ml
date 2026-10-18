@@ -1,0 +1,46 @@
+# Default experiment configuration for bank-marketing-ml.
+# All  paths are relative to the repository root (or /app inside Docker).
+seed: 42
+
+data:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  raw_filename: bank-additional-full.csv
+  # SHA-256 of the extracted CSV (not of the zip archive).
+  sha256: 74adfc578bf77a7ff4bb1ba4a9f8709d9e3c6907342959c2c8416847e0afb4d8
+  # Tried in order; the first archive that yields a CSV with the right hash wins.
+  urls:
+    - https://archive.ics.uci.edu/static/public/222/bank+marketing.zip
+    - https://archive.ics.uci.edu/ml/machine-learning-databases/00222/bank-additional.zip
+  test_size: 0.2
+  # "duration" is only known after the call ends -> target leakage.
+  drop_columns:
+    - duration
+    
+cv:
+  n_splits: 5
+  
+models:
+  # Models compared with identical CV folds in `bank-ml train`.
+  compare:
+    - dummy
+    - logistic_regression
+    - random_forest
+    - hist_gradient_boosting
+    
+search:
+  # Model tuned with RandomizedSearchCV after the comparison.
+  model: hist_gradient_boosting
+  n_iter: 25
+  scoring: average_precision
+  n_jobs: -1
+  
+threshold:
+  # max_f1: threshold that maximizes F1 on out-of-fold predictions.
+  # min_precision: lowest threshold whose precision >= min_precision.
+  strategy: max_f1
+  min_precision: 0.5
+  
+paths:
+  models_dir: models
+  reports_dir: reports
