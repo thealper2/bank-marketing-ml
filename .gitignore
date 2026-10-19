@@ -9,9 +9,21 @@ dist/
 .venv/
 venv/
 
-# ---- Data and models never go into Git
+# ---- Test, lint and type-check caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# ---- Jupyter
+.ipynb_checkpoints/
+
+# ---- Data, models and generated reports (rebuilt by make data/train/evaluate)
 /data/
 /models/
+/reports/
 
 # ---- Secrets and machine-local settings
 .env
